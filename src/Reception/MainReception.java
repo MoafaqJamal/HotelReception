@@ -1,27 +1,24 @@
 package Reception;
 
 import static java.awt.GraphicsDevice.WindowTranslucency.*;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.*;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+import java.awt.*;
+import java.awt.event.*;
+import javax.imageio.*;
 import javax.swing.*;
 import java.util.*;
+import java.io.*;
 
+@SuppressWarnings("unused")
 public class MainReception {
 
 	public JPanel Inframe, Outframe, Buttonframe;
 	public JTextField Input;
-	public JEditorPane Output,Info;
+	public static JEditorPane Output,Info;
 	public JLabel Inputlabel;
-	public JScrollPane Scroll, ScrollInfo;
+	public static JScrollPane Scroll;
+	public static JScrollPane ScrollInfo;
 	public String dialogout = "";
-	public Vector<String> dialoghistory = new Vector<String>();
+	public static Vector<String> dialoghistory = new Vector<String>();
 	public String displaytext = "";
 	String question = "";
 	String answer = "";
@@ -51,7 +48,7 @@ public class MainReception {
 		Scroll.getViewport().setOpaque(false);
 		Scroll.setBorder(null);
 		
-		Info = new JEditorPane("text/html","");	    
+		Info = new JEditorPane("text/html","html string");	    
 		Info.setEditable(false);  			
 		Info.setText("<font face=\"Verdana\">Background information about the conversations topic will be displayed in this window.");
 		//Info.setOpaque(false);

@@ -36,7 +36,9 @@ public class JAXB_XMLParser {
 		}
 	}
 	
+	
 	// Instance objects and return a list with this objects in it
+	@SuppressWarnings("rawtypes")
 	public Hotel loadXML(InputStream fileinputstream) {
 
 		try {
