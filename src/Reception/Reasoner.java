@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import javax.sound.midi.MidiDevice.Info;
+
 import Reception.Booking;
 import Reception.Customer;
 import Reception.Hotel;
@@ -22,13 +24,13 @@ public class Reasoner {
 	// Path to YOUR-PROJECTROOT-IN-WORKSPACE\xjc.bat yourschemaname.xsd -d src
 	// -p yourclasspackagename
 
-	public Hotel thelibrary; //This is a candidate for a name change
+	public Hotel reception; //This is a candidate for a name change
 
 	public MainReception Myface;
 
 	// The lists holding the class instances of all domain entities
 
-	public List theLibraryList = new ArrayList(); //This is a candidate for a name change
+	public List receptionList = new ArrayList(); //This is a candidate for a name change
 	public List theBookList = new ArrayList();    //This is a candidate for a name change
 	public List theMemberList = new ArrayList();  //This is a candidate for a name change
 	public List theCatalogList = new ArrayList(); //This is a candidate for a name change
@@ -115,15 +117,15 @@ public class Reasoner {
 		try {
 			FileInputStream readthatfile = new FileInputStream(xmlfiletoload); // initiate input stream
 
-			thelibrary = xmlhandler.loadXML(readthatfile);
+			reception = xmlhandler.loadXML(readthatfile);
 
 			// Fill the Lists with the objects data just generated from the xml
 
-			theBookList = thelibrary.getBook();  		//This is a candidate for a name change
-			theMemberList = thelibrary.getMember(); 	//This is a candidate for a name change
-			theCatalogList = thelibrary.getCatalog(); 	//This is a candidate for a name change
-			theLendingList = thelibrary.getLending(); 	//This is a candidate for a name change
-			theLibraryList.add(thelibrary);             // force it to be a List, //This is a candidate for a name change
+			theBookList = reception.getBook();  		//This is a candidate for a name change
+			theMemberList = reception.getMember(); 	//This is a candidate for a name change
+			theCatalogList = reception.getCatalog(); 	//This is a candidate for a name change
+			theLendingList = reception.getLending(); 	//This is a candidate for a name change
+			receptionList.add(reception);             // force it to be a List, //This is a candidate for a name change
 
 			System.out.println("List reading");
 		}
@@ -191,9 +193,8 @@ public class Reasoner {
 				|| input.contains("can i borrow")
 				|| input.contains("can i book a room")
 				|| input.contains("am i able to")
-				|| input.contains("could i lend") 
-				|| input.contains("i want to lend")
-				|| input.contains("i want to borrow"))
+				|| input.contains("could i book") 
+				|| input.contains("i want to book a room"))
 
 		{
 			questiontype = "intent";
@@ -234,6 +235,16 @@ public class Reasoner {
 				System.out.println("Exit");
 			}
 		//Command - [Exit] - End
+		
+		//Command - [CLS] - Start
+		if (input.contains("cls") 
+				|| input.contains("Clean")
+				|| input.contains("clean"))
+			{
+				questiontype = "CLS";
+				System.out.println("CLS");
+			}
+		//Command - [CLS] - End
 		
 		
 		//Check - [Command Subject] - Start
@@ -310,7 +321,7 @@ public class Reasoner {
 					
 					input = input.replace(librarysyn.get(x), "<b>"+librarysyn.get(x)+"</b>");
 					
-					classtype = theLibraryList;        //This is a candidate for a name change
+					classtype = receptionList;        //This is a candidate for a name change
 
 					System.out.println("class type Library recognised");		
 
@@ -384,17 +395,37 @@ public class Reasoner {
 			Answered = 1; // An answer was given
 		}
 
-		if (questiontype == "farewell") {       // Reply to a farewell
-			
-			answer=("You are welcome.");
+		//Response - [Thank You] - Start
+		if (questiontype == "farewell") {
+			String name = System.getenv("USERNAME");
+			answer=("You are very welcome"+name);
 
 			Answered = 1; // An answer was given
 		}
+		//Response - [Thank You] - Start
+		
 		
 		//Response - [Help] - Start
 		if (questiontype == "Help") 
 			{       
-				answer="You can use following commands:  " + "<br>" +  "Exit: Quit the program" + "<br>" + "how many rooms" ;
+				answer= "<br>" +
+						"You can use following commands:  " 
+						+ "<br>" +
+						"---------------------------------------"
+						+ "<br>" +  
+						"Exit: Quit the program" 
+						+ "<br>" + "<br>" + "<br>" +
+						"Also you can ask following questions:  "
+						+ "<br>" + 
+						"---------------------------------------"
+						+ "<br>" +
+						"- Where are the room locations"
+						+ "<br>" +
+						"- How many rooms are available" 
+						+ "<br>" +
+						"- Can i book a room"
+						+ "<br>" 
+						;
 				Answered = 1; // An answer was given
 			}
 		
@@ -408,19 +439,36 @@ public class Reasoner {
 		
 		//Response - [Exit] - Start
 		if (questiontype == "Exit") 
-			{       
+			{    
 				System.exit(0);
 			}
-		if (Answered == 0) // No answer was given
+		//Response - [Exit] - End
+		
+		//Response - [CLS] - Start
+		if ((questiontype == "CLS") || (questiontype == "CLEAN"))
+			{    
+			
+			Reception.MainReception.Info.setText("<font face=\"Verdana\">Background information about the conversations topic will be displayed in this window.");
+			Reception.MainReception.dialoghistory.removeAllElements();
+			Reception.MainReception.dialoghistory.add("<H2><font face=\"Verdana\">Welcome to the Hotel Reception Helpdesk, please type your question.</H2> " +
+			          "<H3><font face=\"Verdana\">I can inform you about: Available Rooms, Bookings, Checkin and Checkouts " +
+			          "Just ask me.</H3><br>");
+			Answered = 1;
+			
+			}
+		//Response - [CLS] - End
+		
+		//Response - [Null] - Start
+		if (Answered == 0)
 			{ 
-				answer=("Sorry I didn't understand that." + "<br> " + "You can type [ Help ] or [ ? ] for more information and list of commands.");
+				answer=("Sorry I didn't understand that." + "<br> " + "You can type [ Help ] for more information and list of commands.");
 			}
 
 			out.add(input);
 			out.add(answer);
 			return out;
 	}
-	//Response - [Exit] - End
+		//Response - [Null] - End
 	
 
 	
@@ -723,7 +771,7 @@ public class Reasoner {
 			if (theRecentThing.get(0).getClass().getSimpleName()    
 					.toLowerCase().equals("library")) {                  //This is a candidate for a name change
 
-				location = (thelibrary.getCity() + " " + thelibrary.getStreet() + thelibrary   //This is a candidate for a name change
+				location = (reception.getCity() + " " + reception.getStreet() + reception   //This is a candidate for a name change
 						.getHousenumber());                                           //This is a candidate for a name change
 			}
 
@@ -801,9 +849,9 @@ public class Reasoner {
 				}
 			}
 
-			if (thelist == theLibraryList) {                                                  //This is a candidate for a name change
+			if (thelist == receptionList) {                                                  //This is a candidate for a name change
 
-				location = (thelibrary.getCity() + " " + thelibrary.getStreet() + thelibrary  //This is a candidate for a name change
+				location = (reception.getCity() + " " + reception.getStreet() + reception  //This is a candidate for a name change
 						.getHousenumber());                                                   //This is a candidate for a name change
 			}
 		}
