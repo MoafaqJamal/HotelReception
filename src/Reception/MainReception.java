@@ -1,4 +1,4 @@
-package Examples;
+package Reception;
 
 import static java.awt.GraphicsDevice.WindowTranslucency.*;
 import java.awt.Dimension;

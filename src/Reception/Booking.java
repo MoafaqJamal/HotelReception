@@ -5,7 +5,7 @@
 // Generated on: 2011.12.05 at 11:04:38 AM GMT 
 //
 
-package Examples;
+package Reception;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

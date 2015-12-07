@@ -1,4 +1,4 @@
-package Examples;
+package Reception;
 
 import java.io.*;
 import java.net.URL;
@@ -6,13 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import Examples.Hotel;
-import Examples.Room;
-import Examples.Customer;
-import Examples.Payment;
-import Examples.Booking;
-
-import Examples.MainReception;
+import Reception.Booking;
+import Reception.Customer;
+import Reception.Hotel;
+import Reception.MainReception;
+import Reception.Payment;
+import Reception.Room;
 
 public class Reasoner {
 
