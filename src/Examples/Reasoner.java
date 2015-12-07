@@ -867,7 +867,6 @@ public class Reasoner {
 
 			// Hard coded cut out from "wordnet website source text": 
 			//Check if website still has this structure   vvvv ...definitions...  vvvvv		
-			//check
 
 
 			webtext = webtext.substring(webtext.indexOf("<ul>"),webtext.indexOf("</ul>"));                                 //               ^^^^^^^^^^^^^^^^^              
