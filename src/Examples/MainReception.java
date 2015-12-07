@@ -13,7 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.*;
 import java.util.*;
 
-public class SimpleGUI {
+public class MainReception {
 
 	public JPanel Inframe, Outframe, Buttonframe;
 	public JTextField Input;
@@ -27,7 +27,7 @@ public class SimpleGUI {
 	String answer = "";
 	Reasoner myReasoner;
 
-	public SimpleGUI() {               // Constructor for an Instance of SimpleGUI
+	public MainReception() {               // Constructor for an Instance of SimpleGUI
 
 		myReasoner = new Reasoner(this);         // Instantiate a "brain", reference this GUI to it
 										                      		
@@ -169,7 +169,7 @@ public class SimpleGUI {
 
 	public static void main(String[] args) {                 // main Method (starts when
 												             // class/instance is called)
-		SimpleGUI mygui = new SimpleGUI();
+		MainReception mygui = new MainReception();
 		mygui.checkbrain();                                  // check if brain is there and knowledge loaded
 
 	}

@@ -12,7 +12,7 @@ import Examples.Customer;
 import Examples.Payment;
 import Examples.Booking;
 
-import Examples.SimpleGUI;
+import Examples.MainReception;
 
 public class Reasoner {
 
@@ -25,7 +25,7 @@ public class Reasoner {
 
 	public Hotel thelibrary; //This is a candidate for a name change
 
-	public SimpleGUI Myface;
+	public MainReception Myface;
 
 	// The lists holding the class instances of all domain entities
 
@@ -58,7 +58,7 @@ public class Reasoner {
 	public String URL = "";              // URL for Wordnet site
 	public String URL2 = "";             // URL for Wikipedia entry
 
-	public Reasoner(SimpleGUI myface) {
+	public Reasoner(MainReception myface) {
 
 		Myface = myface; // reference to GUI to update Tooltip-Text
 		// basic constructor for the constructors sake :)
@@ -865,11 +865,11 @@ public class Reasoner {
 				lineread = readit.readLine();				
 			}
 
-			// Hard coded cut out from "wordnet website source text": 
-			//Check if website still has this structure   vvvv ...definitions...  vvvvv		
+			// Hard coded cut out from "wordnet website source text"
+			//Check if website still has this structure	
 
 
-			webtext = webtext.substring(webtext.indexOf("<ul>"),webtext.indexOf("</ul>"));                                 //               ^^^^^^^^^^^^^^^^^              
+			webtext = webtext.substring(webtext.indexOf("<ul>"),webtext.indexOf("</ul>"));
 
 			webtext = "<table width=\"700\"><tr><td>" + webtext
 					+ "</ul></td></tr></table>";
