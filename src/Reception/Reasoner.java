@@ -23,7 +23,7 @@ public class Reasoner {
 	// type:
 	// Path to YOUR-PROJECTROOT-IN-WORKSPACE\xjc.bat yourschemaname.xsd -d src
 	// -p yourclasspackagename
-
+    //test
 	public Hotel reception; //This is a candidate for a name change
 
 	public MainReception Myface;
