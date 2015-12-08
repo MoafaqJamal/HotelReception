@@ -16,14 +16,12 @@ import Reception.Payment;
 import Reception.Room;
 
 public class Reasoner {
-	//hid
 	// The main Class Object holding the Domain knowledge
 
 	// Generate the classes automatically with: Opening a command console and
 	// type:
 	// Path to YOUR-PROJECTROOT-IN-WORKSPACE\xjc.bat yourschemaname.xsd -d src
 	// -p yourclasspackagename
-    //test
 	public Hotel reception; //This is a candidate for a name change
 
 	public MainReception Myface;
