@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Book">
+ * &lt;complexType name="Room">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="isbn" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="location" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="islend" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="isBooked" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlType;
     "title",
     "isbn",
     "location",
-    "islend"
+    "isBooked"
 })
 public class Room {
 
@@ -56,7 +56,7 @@ public class Room {
     @XmlElement(required = true)
     protected String location;
     @XmlElement(required = true)
-    protected String islend;
+    protected String isBooked;
 
     /**
      * Gets the value of the autor property.
@@ -155,27 +155,27 @@ public class Room {
     }
 
     /**
-     * Gets the value of the islend property.
+     * Gets the value of the isBooked property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getIslend() {
-        return islend;
+    public String getisBooked() {
+        return isBooked;
     }
 
     /**
-     * Sets the value of the islend property.
+     * Sets the value of the isBooked property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setIslend(String value) {
-        this.islend = value;
+    public void setisBooked(String value) {
+        this.isBooked = value;
     }
 
 }

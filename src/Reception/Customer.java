@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Amenities">
+ * &lt;complexType name="Customer">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="street" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="housenumber" type="{http://www.w3.org/2001/XMLSchema}integer"/>
  *         &lt;element name="postcode" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="haslend" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="hasbooked" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Amenities", propOrder = {
+@XmlType(name = "Customer", propOrder = {
     "surname",
     "lastname",
     "age",
@@ -52,7 +52,7 @@ import javax.xml.bind.annotation.XmlType;
     "street",
     "housenumber",
     "postcode",
-    "haslend"
+    "hasbooked"
 })
 public class Customer {
 
@@ -73,7 +73,7 @@ public class Customer {
     @XmlElement(required = true)
     protected String postcode;
     @XmlElement(required = true)
-    protected String haslend;
+    protected String hasbooked;
 
     /**
      * Gets the value of the surname property.
@@ -268,27 +268,27 @@ public class Customer {
     }
 
     /**
-     * Gets the value of the haslend property.
+     * Gets the value of the hasbooked property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getHaslend() {
-        return haslend;
+    public String gethasbooked() {
+        return hasbooked;
     }
 
     /**
-     * Sets the value of the haslend property.
+     * Sets the value of the hasbooked property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setHaslend(String value) {
-        this.haslend = value;
+    public void sethasbooked(String value) {
+        this.hasbooked = value;
     }
 
 }

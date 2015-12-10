@@ -44,7 +44,7 @@ public class ObjectFactory {
      * Create an instance of {@link Hotel }
      * 
      */
-    public Hotel createLibrary() {
+    public Hotel createHotel() {
         return new Hotel();
     }
 
@@ -52,7 +52,7 @@ public class ObjectFactory {
      * Create an instance of {@link Customer }
      * 
      */
-    public Customer createMember() {
+    public Customer createCustomer() {
         return new Customer();
     }
 
@@ -60,7 +60,7 @@ public class ObjectFactory {
      * Create an instance of {@link Amenity }
      * 
      */
-    public Amenity createCatalog() {
+    public Amenity createAmenity() {
         return new Amenity();
     }
 
@@ -68,7 +68,7 @@ public class ObjectFactory {
      * Create an instance of {@link Booking }
      * 
      */
-    public Booking createLending() {
+    public Booking createBooking() {
         return new Booking();
     }
 
@@ -76,7 +76,7 @@ public class ObjectFactory {
      * Create an instance of {@link Room }
      * 
      */
-    public Room createBook() {
+    public Room createRoom() {
         return new Room();
     }
 

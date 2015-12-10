@@ -33,9 +33,9 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="housenumber" type="{http://www.w3.org/2001/XMLSchema}integer"/>
  *         &lt;element name="postcode" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="Book" type="{}Book" maxOccurs="unbounded"/>
- *         &lt;element name="Member" type="{}Member" maxOccurs="unbounded"/>
- *         &lt;element name="Catalog" type="{}Catalog" maxOccurs="unbounded"/>
- *         &lt;element name="Lending" type="{}Lending" maxOccurs="unbounded"/>
+ *         &lt;element name="Customer" type="{}Customer" maxOccurs="unbounded"/>
+ *         &lt;element name="Amenity" type="{}Amenity" maxOccurs="unbounded"/>
+ *         &lt;element name="Booking" type="{}Booking" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -51,10 +51,10 @@ import javax.xml.bind.annotation.XmlType;
     "street",
     "housenumber",
     "postcode",
-    "book",
-    "member",
-    "catalog",
-    "lending"
+    "room",
+    "Customer",
+    "Amenity",
+    "Booking"
 })
 public class Hotel {
 
@@ -68,14 +68,14 @@ public class Hotel {
     protected BigInteger housenumber;
     @XmlElement(required = true)
     protected String postcode;
-    @XmlElement(name = "Book", required = true)
-    protected List<Room> book;
-    @XmlElement(name = "Member", required = true)
-    protected List<Customer> member;
-    @XmlElement(name = "Catalog", required = true)
-    protected List<Amenity> catalog;
-    @XmlElement(name = "Lending", required = true)
-    protected List<Booking> lending;
+    @XmlElement(name = "Room", required = true)
+    protected List<Room> room;
+    @XmlElement(name = "Customer", required = true)
+    protected List<Customer> Customer;
+    @XmlElement(name = "Amenity", required = true)
+    protected List<Amenity> Amenity;
+    @XmlElement(name = "Booking", required = true)
+    protected List<Booking> Booking;
 
     /**
      * Gets the value of the name property.
@@ -220,25 +220,25 @@ public class Hotel {
      * 
      */
     public List<Room> getRoom() {
-        if (book == null) {
-            book = new ArrayList<Room>();
+        if (room == null) {
+            room = new ArrayList<Room>();
         }
-        return this.book;
+        return this.room;
     }
 
     /**
-     * Gets the value of the member property.
+     * Gets the value of the Customer property.
      * 
      * <p>
      * This getter method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the member property.
+     * This is why there is not a <CODE>set</CODE> method for the Customer property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getMember().add(newItem);
+     *    getCustomer().add(newItem);
      * </pre>
      * 
      * 
@@ -248,26 +248,26 @@ public class Hotel {
      * 
      * 
      */
-    public List<Customer> getMember() {
-        if (member == null) {
-            member = new ArrayList<Customer>();
+    public List<Customer> getCustomer() {
+        if (Customer == null) {
+            Customer = new ArrayList<Customer>();
         }
-        return this.member;
+        return this.Customer;
     }
 
     /**
-     * Gets the value of the catalog property.
+     * Gets the value of the Amenity property.
      * 
      * <p>
      * This getter method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the catalog property.
+     * This is why there is not a <CODE>set</CODE> method for the Amenity property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCatalog().add(newItem);
+     *    getAmenity().add(newItem);
      * </pre>
      * 
      * 
@@ -277,26 +277,26 @@ public class Hotel {
      * 
      * 
      */
-    public List<Amenity> getCatalog() {
-        if (catalog == null) {
-            catalog = new ArrayList<Amenity>();
+    public List<Amenity> getAmenity() {
+        if (Amenity == null) {
+            Amenity = new ArrayList<Amenity>();
         }
-        return this.catalog;
+        return this.Amenity;
     }
 
     /**
-     * Gets the value of the lending property.
+     * Gets the value of the Booking property.
      * 
      * <p>
      * This getter method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the lending property.
+     * This is why there is not a <CODE>set</CODE> method for the Booking property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getLending().add(newItem);
+     *    getBooking().add(newItem);
      * </pre>
      * 
      * 
@@ -306,11 +306,11 @@ public class Hotel {
      * 
      * 
      */
-    public List<Booking> getLending() {
-        if (lending == null) {
-            lending = new ArrayList<Booking>();
+    public List<Booking> getBooking() {
+        if (Booking == null) {
+            Booking = new ArrayList<Booking>();
         }
-        return this.lending;
+        return this.Booking;
     }
 
 }
