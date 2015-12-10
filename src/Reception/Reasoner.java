@@ -83,7 +83,7 @@ public class Reasoner {
 		CustomerSyn.add("pool");
 		CustomerSyn.add("excersise");
 
-		AmenitySyn.add("locate");  //All of the following is a candidate for a name change
+		AmenitySyn.add("pool");  //All of the following is a candidate for a name change
 		AmenitySyn.add("booklist");
 		AmenitySyn.add("inventor");
 
