@@ -101,8 +101,10 @@ public class MainReception {
 		Main.setVisible(true);                               // Don't forget
 		
 		dialoghistory.add("<H2><font face=\"Verdana\">Welcome to the Hotel Reception Helpdesk, please type your question.</H2> " +
-				          "<H3><font face=\"Verdana\">I can inform you about: Available Rooms, Bookings, Checkin and Checkouts " +
-				          "Just ask me.</H3><br>");
+				          "<H3><font face=\"Verdana\">Following services are available: Available Rooms, Bookings, Checkin and Checkouts, " +
+					      "Just ask me.</H3><br>" +
+				          "<H3><font face=\"Verdana\">To Start, you can type help to explore more. </H3><br>");
+				          
 		
 		Output.setText(dialoghistory.firstElement());
 		Input.requestFocusInWindow();

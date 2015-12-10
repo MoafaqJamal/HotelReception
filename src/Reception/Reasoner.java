@@ -12,7 +12,7 @@ import Reception.Booking;
 import Reception.Customer;
 import Reception.Hotel;
 import Reception.MainReception;
-import Reception.Payment;
+import Reception.Amenity;
 import Reception.Room;
 
 public class Reasoner {
@@ -22,6 +22,8 @@ public class Reasoner {
 	// type:
 	// Path to YOUR-PROJECTROOT-IN-WORKSPACE\xjc.bat yourschemaname.xsd -d src
 	// -p yourclasspackagename
+	
+	
 	public Hotel reception; //This is a candidate for a name change
 
 	public MainReception Myface;
@@ -29,7 +31,7 @@ public class Reasoner {
 	// The lists holding the class instances of all domain entities
 
 	public List receptionList = new ArrayList(); //This is a candidate for a name change
-	public List theBookList = new ArrayList();    //This is a candidate for a name change
+	public List theRoomList = new ArrayList();    //This is a candidate for a name change
 	public List theMemberList = new ArrayList();  //This is a candidate for a name change
 	public List theCatalogList = new ArrayList(); //This is a candidate for a name change
 	public List theLendingList = new ArrayList(); //This is a candidate for a name change
@@ -38,9 +40,9 @@ public class Reasoner {
 
 	// Gazetteers to store synonyms for the domain entities names
 
-	public Vector<String> librarysyn = new Vector<String>();  //This is a candidate for a name change
-	public Vector<String> booksyn = new Vector<String>();     //This is a candidate for a name change
-	public Vector<String> membersyn = new Vector<String>();   //This is a candidate for a name change
+	public Vector<String> HotelSyn = new Vector<String>();  //This is a candidate for a name change
+	public Vector<String> RoomSyn = new Vector<String>();     //This is a candidate for a name change
+	public Vector<String> AmenitiesSyn = new Vector<String>();   //This is a candidate for a name change
 	public Vector<String> catalogsyn = new Vector<String>();  //This is a candidate for a name change
 	public Vector<String> lendingsyn = new Vector<String>();  //This is a candidate for a name change
 	public Vector<String> recentobjectsyn = new Vector<String>();
@@ -72,35 +74,26 @@ public class Reasoner {
 
 		// Init synonmys and typo forms in gazetteers
 
-		librarysyn.add("library");   	//This is a candidate for a name change
-		librarysyn.add("place");		//This is a candidate for a name change
-		librarysyn.add("bookstore");	//This is a candidate for a name change
-		librarysyn.add("bookhouse"); 	//This is a candidate for a name change
-		librarysyn.add("libary");		//This is a candidate for a name change
-		librarysyn.add("libraby");		//This is a candidate for a name change
-		librarysyn.add("librarie");		//This is a candidate for a name change
-		librarysyn.add("help");			//This is a candidate for a name change
+		HotelSyn.add("room");   	//This is a candidate for a name change
+		HotelSyn.add("place");		//This is a candidate for a name change
+		HotelSyn.add("bookstore");	//This is a candidate for a name change
+		HotelSyn.add("bookhouse"); 	//This is a candidate for a name change
+		HotelSyn.add("hotel");		//This is a candidate for a name change
+		HotelSyn.add("hotels");		//This is a candidate for a name change
+		HotelSyn.add("help");			//This is a candidate for a name change
 
-		booksyn.add("room");    //All of the following is a candidate for a name change
-		booksyn.add("bock");
-		booksyn.add(" media");
-		booksyn.add("read");
-		booksyn.add("boook");
-		booksyn.add(" tome");
-		booksyn.add(" bok");
-		booksyn.add(" record");
-		booksyn.add("booklet");
-		booksyn.add("volume");
+		RoomSyn.add("room");    //All of the following is a candidate for a name change
+
 		
 
-		membersyn.add("customer"); //All of the following is a candidate for a name change
-		membersyn.add("reader");
-		membersyn.add("follower");
-		membersyn.add("client");
-		membersyn.add("member");
-		membersyn.add("guy");
+		AmenitiesSyn.add("Amenities"); //All of the following is a candidate for a name change
+		AmenitiesSyn.add("services");
+		AmenitiesSyn.add("service");
+		AmenitiesSyn.add("dining");
+		AmenitiesSyn.add("pool");
+		AmenitiesSyn.add("excersise");
 
-		catalogsyn.add("catalog");  //All of the following is a candidate for a name change
+		catalogsyn.add("locate");  //All of the following is a candidate for a name change
 		catalogsyn.add("booklist");
 		catalogsyn.add("inventor");
 
@@ -119,7 +112,7 @@ public class Reasoner {
 
 			// Fill the Lists with the objects data just generated from the xml
 
-			theBookList = reception.getBook();  		//This is a candidate for a name change
+			theRoomList = reception.getRoom();  		//This is a candidate for a name change
 			theMemberList = reception.getMember(); 	//This is a candidate for a name change
 			theCatalogList = reception.getCatalog(); 	//This is a candidate for a name change
 			theLendingList = reception.getLending(); 	//This is a candidate for a name change
@@ -168,7 +161,8 @@ public class Reasoner {
 		if (input.contains("what kind of")){questiontype = "list"; input = input.replace("what kind of", "<b>what kind of</b>");}
 		if (input.contains("list all")){questiontype = "list"; input = input.replace("list all", "<b>list all</b>");}
 		if (input.contains("diplay all")){questiontype = "list"; input = input.replace("diplay all", "<b>diplay all</b>");}
-
+		
+		if (input.contains("locate")){questiontype = "checkfor"; input = input.replace("locate", "<b>locate</b>");}
 		if (input.contains("is there a")){questiontype = "checkfor"; input = input.replace("is there a", "<b>is there a</b>");}
 		if (input.contains("i am searching")){questiontype = "checkfor"; input = input.replace("i am searching", "<b>i am searching</b>");}
 		if (input.contains("i am looking for")){questiontype = "checkfor"; input = input.replace("i am looking for", "<b>i am looking for</b>");}
@@ -187,12 +181,12 @@ public class Reasoner {
 		}
 		
 		//Command - [Can i] - Start
-		if (input.contains("can i lend") 
-				|| input.contains("can i borrow")
-				|| input.contains("can i book a room")
+		if (input.contains("can i book") 
+				|| input.contains("can i reserve")
+				|| input.contains("can i book a")
 				|| input.contains("am i able to")
 				|| input.contains("could i book") 
-				|| input.contains("i want to book a room"))
+				|| input.contains("i want to book"))
 
 		{
 			questiontype = "intent";
@@ -246,21 +240,21 @@ public class Reasoner {
 		
 		
 		//Check - [Command Subject] - Start
-		for (int x = 0; x < booksyn.size(); x++) {   //This is a candidate for a name change
-			if (input.contains(booksyn.get(x))) {    //This is a candidate for a name change
-				classtype = theBookList;             //This is a candidate for a name change
+		for (int x = 0; x < RoomSyn.size(); x++) {   //This is a candidate for a name change
+			if (input.contains(RoomSyn.get(x))) {    //This is a candidate for a name change
+				classtype = theRoomList;             //This is a candidate for a name change
 				
-				input = input.replace(booksyn.get(x), "<b>"+booksyn.get(x)+"</b>");
+				input = input.replace(RoomSyn.get(x), "<b>"+RoomSyn.get(x)+"</b>");
 				
 				subjectcounter = 1;
 				System.out.println("Class type Book recognised.");
 			}
 		}
-		for (int x = 0; x < membersyn.size(); x++) {  //This is a candidate for a name change
-			if (input.contains(membersyn.get(x))) {   //This is a candidate for a name change
+		for (int x = 0; x < AmenitiesSyn.size(); x++) {  //This is a candidate for a name change
+			if (input.contains(AmenitiesSyn.get(x))) {   //This is a candidate for a name change
 				classtype = theMemberList;            //This is a candidate for a name change
 				
-				input = input.replace(membersyn.get(x), "<b>"+membersyn.get(x)+"</b>");
+				input = input.replace(AmenitiesSyn.get(x), "<b>"+AmenitiesSyn.get(x)+"</b>");
 				
 				subjectcounter = 1;
 				System.out.println("Class type Member recognised.");
@@ -308,16 +302,16 @@ public class Reasoner {
 		//Check - [Command Subject (More than one Subject)] - Start
 		System.out.println("subjectcounter = "+subjectcounter);
 
-		for (int x = 0; x < librarysyn.size(); x++) {  //This is a candidate for a name change
+		for (int x = 0; x < HotelSyn.size(); x++) {  //This is a candidate for a name change
 
-			if (input.contains(librarysyn.get(x))) {   //This is a candidate for a name change
+			if (input.contains(HotelSyn.get(x))) {   //This is a candidate for a name change
 
 				// Problem: "How many Books does the Library have ?" -> classtype = Library
 				// Solution:
 				
 				if (subjectcounter == 0) { // Library is the first subject in the question
 					
-					input = input.replace(librarysyn.get(x), "<b>"+librarysyn.get(x)+"</b>");
+					input = input.replace(HotelSyn.get(x), "<b>"+HotelSyn.get(x)+"</b>");
 					
 					classtype = receptionList;        //This is a candidate for a name change
 
@@ -385,11 +379,11 @@ public class Reasoner {
 			Answered = 1; // An answer was given
 		}
 
-		if ((questiontype == "intent" && classtype == theBookList) 
+		if ((questiontype == "intent" && classtype == theRoomList) 
 				||(questiontype == "intent" && classtype == theRecentThing)) {
 
 			// Can I lend the book or not (Can I lent "it" or not)
-			answer=("Ofcourse, "+ BookAvailable(classtype, input));
+			answer=("Reception: "+ RoomAvailable(classtype, input));
 			Answered = 1; // An answer was given
 		}
 
@@ -411,11 +405,18 @@ public class Reasoner {
 						+ "<br>" +
 						"---------------------------------------"
 						+ "<br>" +  
-						"Exit: Quit the program" 
+						"Exit: Quit the program" + "<br>" +
+						"CLS: Clear the screen"
 						+ "<br>" + "<br>" + "<br>" +
 						"Also you can ask following questions:  "
 						+ "<br>" + 
 						"---------------------------------------"
+						+ "<br>" +
+						"- where is the hotel"
+						+ "<br>" +
+						"- I am looking for a double room"
+						+ "<br>" +
+						"- What kind of rooms are available"
 						+ "<br>" +
 						"- Where are the room locations"
 						+ "<br>" +
@@ -449,8 +450,9 @@ public class Reasoner {
 			Reception.MainReception.Info.setText("<font face=\"Verdana\">Background information about the conversations topic will be displayed in this window.");
 			Reception.MainReception.dialoghistory.removeAllElements();
 			Reception.MainReception.dialoghistory.add("<H2><font face=\"Verdana\">Welcome to the Hotel Reception Helpdesk, please type your question.</H2> " +
-			          "<H3><font face=\"Verdana\">I can inform you about: Available Rooms, Bookings, Checkin and Checkouts " +
-			          "Just ask me.</H3><br>");
+			          "<H3><font face=\"Verdana\">Following services are available: Available Rooms, Bookings, Checkin and Checkouts, " +
+				      "Just ask me.</H3><br>" +
+			          "<H3><font face=\"Verdana\">To Start, you can type help to explore more. </H3><br>");
 			Answered = 1;
 			
 			}
@@ -474,7 +476,7 @@ public class Reasoner {
 	
 	// Methods to generate answers for the different kinds of Questions
 	// Answer a question of the "Is a book or "it (meaning a book) available ?" kind
-	public String BookAvailable(List thelist, String input) 
+	public String RoomAvailable(List thelist, String input) 
 	{
 
 		boolean available =true;
@@ -482,7 +484,7 @@ public class Reasoner {
 		Room curbook = new Room();
 		String booktitle="";
 
-		if (thelist == theBookList) {                      //This is a candidate for a name change
+		if (thelist == theRoomList) {                      //This is a candidate for a name change
 
 			int counter = 0;
 
@@ -500,7 +502,7 @@ public class Reasoner {
 
 					Currentindex = counter;
 					theRecentThing.clear(); 									//Clear it before adding (changing) the
-					classtype = theBookList;                                    //This is a candidate for a name change
+					classtype = theRoomList;                                    //This is a candidate for a name change
 					theRecentThing.add(classtype.get(Currentindex));
 					booktitle=curbook.getTitle();
 										
@@ -543,10 +545,10 @@ public class Reasoner {
 		}
 
 		if(available){
-			answer="there are rooms available to book";
+			answer="There are rooms available to book";
 		}
 		else{ 
-			answer="are rooms are fully booked or that specific room";
+			answer="Sorry that type of rooms are fully booked";
 		}
 
 		URL = "http://wordnetweb.princeton.edu/perl/webwn?o2=&o0=1&o8=1&o1=1&o7=&o5=&o9=&o6=&o3=&o4=&s="
@@ -565,7 +567,7 @@ public class Reasoner {
 
 	
 	//Response Web Area - [Number of Rooms] - Start
-	public Integer Count(List thelist) { // List "thelist": List of Class Instances (e.g. theBookList)
+	public Integer Count(List thelist) { // List "thelist": List of Class Instances (e.g. theRoomList)
 
 		//URL = "http://en.wiktionary.org/wiki/"		
 
@@ -590,7 +592,7 @@ public class Reasoner {
 
 		String listemall = "<ul>";
 
-		if (thelist == theBookList) {                                  //This is a candidate for a name change
+		if (thelist == theRoomList) {                                  //This is a candidate for a name change
 			for (int i = 0; i < thelist.size(); i++) {
 				Room curbook = (Room) thelist.get(i);                  //This is a candidate for a name change
 				listemall = listemall + "<li>" + (curbook.getTitle() + "</li>");    //This is a candidate for a name change
@@ -607,7 +609,7 @@ public class Reasoner {
 
 		if (thelist == theCatalogList) {                               //This is a candidate for a name change
 			for (int i = 0; i < thelist.size(); i++) {
-				Payment curcat = (Payment) thelist.get(i);             //This is a candidate for a name change
+				Amenity curcat = (Amenity) thelist.get(i);             //This is a candidate for a name change
 				listemall = listemall 
 						+ "<li>" + (curcat.getName() + "</li>");      //This is a candidate for a name change
 			}
@@ -650,7 +652,7 @@ public class Reasoner {
 
 		Integer counter = 0;
 
-		if (thelist == theBookList) {                         //This is a candidate for a name change
+		if (thelist == theRoomList) {                         //This is a candidate for a name change
 
 			for (int i = 0; i < thelist.size(); i++) {
 
@@ -661,7 +663,7 @@ public class Reasoner {
 						|| input.contains(curbook.getAutor().toLowerCase())) {  //This is a candidate for a name change
 
 					counter = i;
-					yesorno.set(0, "Yes we have such a Book");                  //This is a candidate for a name change
+					yesorno.set(0, "Requested Room is Available.");                  //This is a candidate for a name change
 					yesorno.add(counter.toString());
 					i = thelist.size() + 1; // force break
 				}
@@ -676,7 +678,7 @@ public class Reasoner {
 						|| input.contains(curmem.getCity().toLowerCase())) {  //This is a candidate for a name change
 
 					counter = i;
-					yesorno.set(0, "Yes we have such a Member");               //This is a candidate for a name change
+					yesorno.set(0, "Yes we do have such a Amenitiy");               //This is a candidate for a name change
 					yesorno.add(counter.toString());
 					i = thelist.size() + 1;
 				}
@@ -685,12 +687,12 @@ public class Reasoner {
 
 		if (thelist == theCatalogList) {                                    //This is a candidate for a name change
 			for (int i = 0; i < thelist.size(); i++) {
-				Payment curcat = (Payment) thelist.get(i);                  //This is a candidate for a name change
+				Amenity curcat = (Amenity) thelist.get(i);                  //This is a candidate for a name change
 				if (input.contains(curcat.getName().toLowerCase())          //This is a candidate for a name change
 						|| input.contains(curcat.getUrl().toLowerCase())) { //This is a candidate for a name change
 
 					counter = i;
-					yesorno.set(0, "Yes we have such a Catalog");           //This is a candidate for a name change
+					yesorno.set(0, "Yes we have such a room");           //This is a candidate for a name change
 					yesorno.add(counter.toString());
 					i = thelist.size() + 1;
 				}
@@ -761,7 +763,7 @@ public class Reasoner {
 			if (theRecentThing.get(0).getClass().getSimpleName()  
 					.toLowerCase().equals("catalog")) {                 //This is a candidate for a name change
 
-				Payment curcat = (Payment) theRecentThing.get(0);       //This is a candidate for a name change
+				Amenity curcat = (Amenity) theRecentThing.get(0);       //This is a candidate for a name change
 				location = (curcat.getLocation() + " ");                //This is a candidate for a name change
 
 			}
@@ -779,7 +781,7 @@ public class Reasoner {
 
 		else {
 
-			if (thelist == theBookList) {                         //This is a candidate for a name change
+			if (thelist == theRoomList) {                         //This is a candidate for a name change
 
 				int counter = 0;
 
@@ -795,7 +797,7 @@ public class Reasoner {
 						location = (curbook.getLocation() + " ");
 						Currentindex = counter;
 						theRecentThing.clear(); 									// Clear it before adding (changing) theRecentThing
-						classtype = theBookList;                                    //This is a candidate for a name change
+						classtype = theRoomList;                                    //This is a candidate for a name change
 						theRecentThing.add(classtype.get(Currentindex));
 						i = thelist.size() + 1; 									// force break
 					}
@@ -831,7 +833,7 @@ public class Reasoner {
 
 				for (int i = 0; i < thelist.size(); i++) {
 
-					Payment curcatalog = (Payment) thelist.get(i);                    //This is a candidate for a name change
+					Amenity curcatalog = (Amenity) thelist.get(i);                    //This is a candidate for a name change
 
 					if (input.contains(curcatalog.getName().toLowerCase())            //This is a candidate for a name change						     
 							|| input.contains(curcatalog.getUrl().toLowerCase())) {   //This is a candidate for a name change
@@ -874,11 +876,11 @@ public class Reasoner {
 
 		String answer = "";
 
-		System.out.println("room List = " + theBookList.size());  //This is a candidate for a name change
+		System.out.println("room List = " + theRoomList.size());  //This is a candidate for a name change
 
-		for (int i = 0; i < theBookList.size(); i++) {   // check each book in the List, //This is a candidate for a name change
+		for (int i = 0; i < theRoomList.size(); i++) {   // check each book in the List, //This is a candidate for a name change
 
-			Room curbook = (Room) theBookList.get(i);    // cast list element to Book Class //This is a candidate for a name change												
+			Room curbook = (Room) theRoomList.get(i);    // cast list element to Book Class //This is a candidate for a name change												
 			System.out.println("Testing Book" + curbook.getAutor());
 
 			if (curbook.getAutor().equalsIgnoreCase("dostoyjewski")) {     // check for the author //This is a candidate for a name change
